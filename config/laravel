@@ -6,10 +6,14 @@ server {
     index index.php index.html index.htm;
 
     location / {
+        more_set_headers 'Access-Control-Allow-Origin: $http_origin';
+        more_set_headers 'Access-Control-Allow-Credentials: true';
     	try_files $uri $uri/ /index.html /index.php?$query_string;
     }
 
     location ~ \.php$ {
+        more_set_headers 'Access-Control-Allow-Origin: $http_origin';
+        more_set_headers 'Access-Control-Allow-Credentials: true';
     	include fastcgi.conf;
         fastcgi_pass phpfpm_backend;
         fastcgi_param SCRIPT_FILENAME $request_filename;
